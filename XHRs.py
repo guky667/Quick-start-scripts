@@ -9,6 +9,7 @@ async def xhrHandler(endpoint,headers=None):
         async with ClientSession() as session:
             async with session.get(yarl.URL(endpoint,encoded=True),headers=headers) as response:
                 response = await response.read()
+                response = json.loads(response)
                 print (response)
     
     except Exception as e:

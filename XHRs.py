@@ -1,4 +1,4 @@
-import aiohttp,asyncio,json,yarl
+import asyncio,json,yarl
 from aiohttp import ClientSession
 
 loop = asyncio.get_event_loop()

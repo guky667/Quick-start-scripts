@@ -53,22 +53,13 @@ async def xhrPostHandler(endpoint, payload, headers):
 
 def get(endpoint, headers = None):
     """# GET XHR
-    Takes either a single URL or a list of URLS;
+    Takes a single URL as the 1st param;
     Can take headers dict as the 2nd param
     """
 
-    if isinstance(endpoint,str):
-        tasks = [asyncio.ensure_future(xhrGetHandler(endpoint, headers))]
-        loop.run_until_complete(asyncio.wait(tasks))
-        return tasks[0]._result
-
-    if isinstance(endpoint,list):
-        tasks = [asyncio.ensure_future(xhrGetHandler(url, headers)) for url in endpoint]
-        loop.run_until_complete(asyncio.wait(tasks))
-        responses = {}
-        for i in range(len(endpoint)):
-            responses[endpoint[i]] = tasks[i]._result
-        return responses
+    tasks = [asyncio.ensure_future(xhrGetHandler(endpoint, headers))]
+    loop.run_until_complete(asyncio.wait(tasks))
+    return tasks[0]._result
 
 def put(endpoint, payload, headers = None):
     """# PUT XHR
